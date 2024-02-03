@@ -7,13 +7,13 @@
   </PropertyGroup>
   <PropertyGroup Label="Analyzers">
 	<NoWarn>NU1605;NU1504;NU5105;1701;1702;1591;8002;$(NoWarn)</NoWarn>
-	<NoWarn>SA1623;SA1028;SA1615;SA1027;SA1037;$(NoWarn)</NoWarn>
+	<NoWarn>SA1623;SA1028;SA1615;SA1027;SA1037;SA1201;$(NoWarn)</NoWarn>
 	<!--
 		SA1615 - Element return value should be documented
 		SA1629 - A section of the Xml header documentation for a C# element does not end with a period (also known as a full stop).
 		-->
-	<NoWarn>SA1600;SA1629;CS1591;SA1615;(NoWarn)</NoWarn>
-	<NoWarn>CA1822;CA1852;CA1805;$(NoWarn)</NoWarn>
+	<NoWarn>SA1600;SA1629;CS1591;SA1615;SA1402;SA1401;SA1306;(NoWarn)</NoWarn>
+	<NoWarn>CA1822;CA1852;CA1805;CA1051;$(NoWarn)</NoWarn>
 	<!--<DisablePublicApiAnalyzer>true</DisablePublicApiAnalyzer>-->
 	<AnalysisLevel>latest-recommended</AnalysisLevel>
 	<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -51,10 +51,10 @@
 	<!--Condition="'$(GITHUB_ACTIONS)' == 'true' and '$(IsTestProject)' != 'true'"-->
 	<PackageReference ExcludeAssets="compile" PrivateAssets="all" Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
 	<PackageReference ExcludeAssets="compile" PrivateAssets="all" Include="Nullable" Version="1.3.1" />
-	<PackageReference ExcludeAssets="compile" PrivateAssets="all" Include="Nerdbank.GitVersioning" Version="3.7.48-alpha" Condition="!Exists('packages.config')" />
+	<PackageReference ExcludeAssets="compile" PrivateAssets="all" Include="Nerdbank.GitVersioning" Version="3.7.48-alpha" />
 	<!--<GlobalPackageReference Include="Nerdbank.GitVersioning" />-->
   </ItemGroup>
-  <Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+  <Target Name="PrepareReleaseNotes" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion" >
 	<PropertyGroup>
 	  <PackageReleaseNotes Condition="'$(PackageProjectUrl)'!=''">$(PackageProjectUrl)/releases/tag/v$(Version)</PackageReleaseNotes>
 	</PropertyGroup>
